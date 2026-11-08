@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Anrosys"
+description = "A high-performance, responsive company website for Anrosys, showcasing software services, client work, EduPortal, careers, and direct contact options."
+version = "1.0.0"
+id = "artifacts/anrosys-site"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19766
+
+[services.development]
+run = "pnpm --filter @workspace/anrosys-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/anrosys-site", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/anrosys-site/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19766"
+BASE_PATH = "/"

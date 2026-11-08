@@ -12,7 +12,7 @@ const CONTACT = {
 const descriptions: Record<string, { title: string; description: string }> = {
   '/': {
     title: 'Anrosys — Software built around your business',
-    description: 'A hands-on software partner for thoughtful digital products. Meet Anrosys EduPortal, our live platform for educational institutions.',
+    description: 'A hands-on software partner for thoughtful digital products, custom software and dependable engineering.',
   },
   '/about': {
     title: 'About Anrosys — A practical software partner',
@@ -68,7 +68,6 @@ function Header() {
   const nav = [
     { href: '/about', label: 'About' },
     { href: '/#services', label: 'What we do' },
-    { href: '/#eduportal', label: 'EduPortal' },
     { href: '/#work', label: 'Our work' },
     { href: '/careers', label: 'Careers' },
   ];
@@ -113,7 +112,6 @@ function Footer() {
           <div className="mt-5 flex flex-col gap-3 text-sm text-[#d5ddd7]">
             <Link href="/about" className="w-fit hover:text-white">About Anrosys</Link>
             <a href="/#services" className="w-fit hover:text-white">Services</a>
-            <a href="/#eduportal" className="w-fit hover:text-white">EduPortal</a>
             <Link href="/careers" className="w-fit hover:text-white">Careers</Link>
           </div>
         </div>
@@ -141,7 +139,7 @@ function Eyebrow({ children, light = false }: { children: ReactNode; light?: boo
 function Home() {
   return (
     <main>
-      <section className="hero-art grain relative flex min-h-[650px] items-center overflow-hidden bg-[#18383d] text-[#f7f3e9] md:min-h-[700px]">
+      <section className="hero-art relative flex min-h-[650px] items-center overflow-hidden bg-[#18383d] text-[#f7f3e9] md:min-h-[700px]">
         <div className="site-shell relative z-10 grid w-full items-center gap-12 py-20 md:grid-cols-[1fr_.52fr] md:py-28">
           <div className="max-w-[760px]">
             <Eyebrow light>Software partner · Product people</Eyebrow>
@@ -168,7 +166,7 @@ function Home() {
         <div className="site-shell">
           <div className="grid gap-8 md:grid-cols-[.8fr_1.2fr] md:items-end">
             <div><Eyebrow>What we do</Eyebrow><h2 className="display mt-5 max-w-[500px] text-4xl leading-[1.05] text-[#18383d] md:text-[3.6rem]">From a tangled brief to a product that feels clear.</h2></div>
-            <p className="max-w-[480px] pb-1 text-[15px] leading-7 text-[#5b6867] md:ml-auto">No two businesses need the same software. We bring product thinking, design and engineering together around the problem in front of you.</p>
+            <p className="max-w-[480px] pb-1 text-[15px] leading-7 text-[#5b6867] md:ml-auto">No two businesses need the same software. We bring product thinking, design and engineering together around the problem in front of you. Our portfolio includes <a href="https://anrosysedu.in" target="_blank" rel="noreferrer" className="font-semibold text-[#24645e] underline decoration-[#24645e]/40 underline-offset-4 hover:decoration-[#24645e]">EduPortal</a>, our live SaaS product for education institutions.</p>
           </div>
           <div className="mt-14 grid gap-3 md:grid-cols-3">
             {[
@@ -183,35 +181,6 @@ function Home() {
           </div>
           <div className="mt-9 flex flex-wrap gap-x-8 gap-y-3 text-[11px] font-bold uppercase tracking-[.12em] text-[#53706c]">
             <span>Product strategy</span><span>·</span><span>Web platforms</span><span>·</span><span>Custom software</span><span>·</span><span>Ongoing partnership</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="eduportal" className="scroll-mt-16 bg-[#e7e8dd] py-20 md:py-28">
-        <div className="site-shell grid gap-12 md:grid-cols-[1.05fr_.95fr] md:items-center">
-          <div className="relative min-h-[365px] overflow-hidden rounded-[4px] bg-[#d1d7c9] p-5 sm:p-8">
-            <div className="absolute -right-16 -top-28 h-[330px] w-[330px] rounded-full border border-[#24645e]/20"/>
-            <div className="absolute -right-4 -top-16 h-[240px] w-[240px] rounded-full border border-[#24645e]/20"/>
-            <div className="relative z-10 ml-auto max-w-[430px] rounded-[5px] border border-[#18383d]/10 bg-[#f7f4eb] p-5 shadow-[0_25px_50px_rgba(24,56,61,.1)] sm:p-7">
-              <div className="flex items-center justify-between border-b border-[#18383d]/10 pb-4">
-                <div><p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#34756e]">EduPortal / Platform modules</p><p className="mt-1 text-[12px] font-semibold text-[#18383d]">Institution operations</p></div>
-                <span className="h-2 w-2 rounded-full bg-[#65a084]"/>
-              </div>
-              <div className="grid grid-cols-2 gap-3 py-5">
-                {['Student records','Batch scheduling','Attendance','Fee collection'].map((label) => <div key={label} className="flex min-h-[72px] items-end rounded-[3px] bg-[#e9eee6] p-3.5"><p className="text-[12px] font-semibold text-[#344f4c]">{label}</p></div>)}
-              </div>
-              <div className="flex items-center gap-2 border-t border-[#18383d]/10 pt-4 text-[10px] text-[#687976]"><span className="h-1.5 w-1.5 rounded-full bg-[#e19a70]"/> A connected view of your institution</div>
-            </div>
-            <div className="absolute bottom-5 left-5 text-[10px] font-bold uppercase tracking-[.16em] text-[#59736d] sm:bottom-8 sm:left-8">Anrosys product / 001</div>
-          </div>
-          <div className="md:pl-8">
-            <Eyebrow>Our live product</Eyebrow>
-            <h2 className="display mt-5 max-w-[550px] text-4xl leading-[1.05] text-[#18383d] md:text-[3.65rem]">A calmer way to run a learning institution.</h2>
-            <p className="mt-6 max-w-[490px] text-[15px] leading-7 text-[#5b6867]">EduPortal brings the moving parts of an educational institution into one connected platform — built to make daily operations simpler for teams, students and families.</p>
-            <div className="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 text-[12px] font-semibold text-[#344f4c] sm:grid-cols-3">
-              {['Student records','Batch scheduling','Fee collection','Attendance','Analytics','Parent & student portals','Multi-branch operations','Institutional security'].map((feature) => <div key={feature} className="flex gap-2"><span className="text-[#d8835d]">/</span>{feature}</div>)}
-            </div>
-            <a href="https://anrosysedu.in" target="_blank" rel="noreferrer" className="mt-8 inline-flex items-center gap-2 border-b border-[#24645e] pb-1.5 text-[13px] font-bold text-[#24645e] transition-colors hover:text-[#18383d]">Explore Anrosys EduPortal <ArrowUpRight size={15}/></a>
           </div>
         </div>
       </section>
@@ -290,9 +259,6 @@ function About() {
           <div><Eyebrow light>In practice</Eyebrow><p className="display mt-6 max-w-[700px] text-3xl leading-[1.15] md:text-[2.8rem]">“We don’t arrive with a pre-made answer. We work alongside you to find the one that fits.”</p></div>
           <div className="md:justify-self-end"><p className="display text-6xl tracking-[-.06em]">10<span className="text-[#efaa83]">+</span></p><p className="mt-2 text-sm text-[#c4d0ca]">clients across multiple projects</p><a href={CONTACT.calendar} target="_blank" rel="noreferrer" className="mt-7 inline-flex items-center gap-2 border-b border-[#efaa83] pb-1.5 text-[12px] font-bold text-[#efaa83]">Start a conversation <ArrowUpRight size={15}/></a></div>
         </div>
-      </section>
-      <section className="py-20 md:py-24">
-        <div className="site-shell flex flex-col justify-between gap-7 md:flex-row md:items-center"><div><Eyebrow>Product, meet practice</Eyebrow><h2 className="display mt-5 max-w-[700px] text-4xl leading-tight text-[#18383d] md:text-[3.4rem]">EduPortal is our approach, put to work.</h2><p className="mt-4 max-w-[570px] text-[14px] leading-7 text-[#64716e]">A live SaaS platform that helps educational institutions manage students, schedules, fees and more — all in one place.</p></div><a href="https://anrosysedu.in" target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-3 rounded-full bg-[#24645e] px-6 py-4 text-[13px] font-bold text-[#f7f3e9]">Explore EduPortal <ArrowUpRight size={16}/></a></div>
       </section>
       <ContactBand />
     </main>

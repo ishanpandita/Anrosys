@@ -1,12 +1,13 @@
 import { type ReactNode, useEffect, useState } from 'react';
 import { Link, Route, Switch, useLocation } from 'wouter';
-import { ArrowDown, ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, Mail, MapPin, Menu, X } from 'lucide-react';
+import { SiCalendly, SiWhatsapp } from 'react-icons/si';
 
 const CONTACT = {
   whatsapp: 'https://wa.me/918899808117',
   email: 'mailto:anrosysedu@gmail.com',
   calendar: 'https://calendly.com/anrosysedu/30min',
-  careers: 'mailto:xyz@mail?subject=Career%20application%20at%20Anrosys',
+  careers: 'mailto:anrosysedu@gmail.com?subject=Career%20application%20at%20Anrosys',
 };
 
 const descriptions: Record<string, { title: string; description: string }> = {
@@ -56,7 +57,7 @@ function Brand({ light = false }: { light?: boolean }) {
           <path d="M15.9 21h8.2" stroke="#f0a47a" strokeWidth="2.5" strokeLinecap="round"/>
         </svg>
       </span>
-      <span className="font-[var(--app-font-serif)] text-[1.23rem] font-extrabold tracking-[-.06em]">anrosys<span className="text-[#d8835d]">.</span></span>
+      <span className="wordmark font-[var(--app-font-serif)] text-[1.23rem] font-extrabold tracking-[-.06em]">anrosys<span className="wordmark-caret" aria-hidden="true" /></span>
     </Link>
   );
 }
@@ -67,7 +68,7 @@ function Header() {
   useEffect(() => setOpen(false), [location]);
   const nav = [
     { href: '/about', label: 'About' },
-    { href: '/#services', label: 'What we do' },
+    { href: '/#services', label: 'Services' },
     { href: '/#work', label: 'Our work' },
     { href: '/careers', label: 'Careers' },
   ];
@@ -100,9 +101,21 @@ function Header() {
 }
 
 function Footer() {
+  const offices = [
+    {
+      city: 'Ghaziabad',
+      address: '4006, Paramount Symphony, Crossing Republik, Ghaziabad 201016',
+      maps: 'https://maps.app.goo.gl/weUuRYq34A7dtMeaA',
+    },
+    {
+      city: 'Mohali',
+      address: '10 Golden Estate, Mohali 140307',
+      maps: 'https://www.google.com/maps/search/?api=1&query=10%20Golden%20Estate%2C%20Mohali%20140307',
+    },
+  ];
   return (
-    <footer className="bg-[#18383d] text-[#f3efe5]">
-      <div className="site-shell grid gap-12 py-14 md:grid-cols-[1.3fr_.7fr_.8fr] md:py-[72px]">
+    <footer className="bg-[#18383d] text-[#f3efe5]" data-scroll-reveal>
+      <div className="site-shell grid gap-x-10 gap-y-11 py-14 md:grid-cols-2 md:py-[72px] xl:grid-cols-[1.05fr_.62fr_1.65fr_.9fr]">
         <div>
           <Brand light />
           <p className="mt-5 max-w-[350px] text-sm leading-7 text-[#c4d0ca]">A hands-on software partner for the work that matters. Thoughtful products, made dependable.</p>
@@ -113,6 +126,23 @@ function Footer() {
             <Link href="/about" className="w-fit hover:text-white">About Anrosys</Link>
             <a href="/#services" className="w-fit hover:text-white">Services</a>
             <Link href="/careers" className="w-fit hover:text-white">Careers</Link>
+          </div>
+        </div>
+        <div className="md:col-span-2 xl:col-span-1">
+          <p className="eyebrow text-[#e8a27d]">Our offices</p>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            {offices.map((office) => (
+              <article key={office.city} className="min-w-0 border-l border-white/20 pl-4">
+                <div className="flex items-center gap-2 text-[#8dd5d7]">
+                  <MapPin aria-hidden="true" size={15} strokeWidth={1.8} />
+                  <h3 className="text-[13px] font-semibold tracking-[.01em] text-[#f2f8f9]">{office.city}</h3>
+                </div>
+                <p className="mt-2 max-w-[260px] text-[12px] leading-5 text-[#c4d0ca]">{office.address}</p>
+                <a href={office.maps} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#8dd5d7] underline decoration-white/25 underline-offset-4 transition-colors hover:text-white">
+                  Open in Google Maps <ArrowUpRight aria-hidden="true" size={12} />
+                </a>
+              </article>
+            ))}
           </div>
         </div>
         <div>
@@ -140,42 +170,47 @@ function Home() {
   return (
     <main>
       <section className="hero-art relative flex min-h-[650px] items-center overflow-hidden bg-[#18383d] text-[#f7f3e9] md:min-h-[700px]">
-        <div className="site-shell relative z-10 grid w-full items-center gap-12 py-20 md:grid-cols-[1fr_.52fr] md:py-28">
-          <div className="max-w-[760px]">
-            <Eyebrow light>Software partner · Product people</Eyebrow>
-            <h1 className="display reveal mt-7 max-w-[810px] text-[clamp(3.2rem,8vw,7.3rem)] leading-[.98]">Good software<br/>starts with <span className="text-[#efaa83]">listening.</span></h1>
-            <p className="reveal reveal-delay-1 mt-7 max-w-[525px] text-[16px] leading-7 text-[#e1e5dc] md:text-[18px] md:leading-8">We turn the way your business works into digital products people can rely on — with a real team beside you, from first question to what comes next.</p>
+        <div className="site-shell relative z-10 w-full py-20 md:py-24">
+          <div className="hero-copy max-w-[760px]">
+            <Eyebrow>Software partner · Product people</Eyebrow>
+            <h1 className="display reveal mt-7 max-w-[810px] text-[clamp(3.25rem,7vw,6.7rem)] leading-[.99]">Good software<br/>starts with <span>listening.</span></h1>
+            <p className="reveal reveal-delay-1 mt-7 max-w-[525px] text-[16px] leading-7 md:text-[18px] md:leading-8">We turn the way your business works into digital products people can rely on — with a real team beside you, from first question to what comes next.</p>
             <div className="reveal reveal-delay-2 mt-9 flex flex-wrap items-center gap-3">
-              <a href={CONTACT.calendar} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 rounded-full bg-[#f0a47a] px-6 py-4 text-[13px] font-bold text-[#18383d] transition-transform hover:-translate-y-1">Tell us what you’re building <ArrowUpRight size={16}/></a>
-              <a href="#services" className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-4 text-[13px] font-semibold text-white transition-colors hover:bg-white/10">Explore our approach <ArrowDown size={15}/></a>
+              <a href={CONTACT.calendar} target="_blank" rel="noreferrer" className="hero-primary inline-flex items-center gap-3 rounded-full px-6 py-4 text-[13px] font-bold transition-transform hover:-translate-y-1">Tell us what you’re building <ArrowUpRight size={16}/></a>
+              <a href="#services" className="hero-secondary inline-flex items-center gap-2 rounded-full border px-6 py-4 text-[13px] font-semibold transition-colors">Explore our approach <ArrowDown size={15}/></a>
+            </div>
+            <div className="hero-stats reveal reveal-delay-3 mt-12 flex flex-wrap gap-x-9 gap-y-5 border-t pt-6">
+              <div><strong>10<span>+</span></strong><small>Clients across projects</small></div>
+              <div><strong>One</strong><small>Connected team, end to end</small></div>
+              <div><strong>Built</strong><small>Around how your business works</small></div>
             </div>
           </div>
-          <div className="reveal reveal-delay-3 hidden justify-end md:flex">
-            <div className="w-[240px] border-l border-white/30 pl-5">
-              <p className="display text-[3.8rem] leading-none tracking-[-.06em]">10<span className="text-[#efaa83]">+</span></p>
-              <p className="mt-3 text-[13px] leading-6 text-[#e1e5dc]">clients across multiple projects — each with its own shape, pace and needs.</p>
-              <div className="mt-8 h-px w-12 bg-[#efaa83]"/>
-              <p className="mt-4 text-[11px] font-bold uppercase tracking-[.14em] text-[#c5d2ca]">Independent by nature<br/>Collaborative by design</p>
-            </div>
+          <div className="hero-orbit" aria-hidden="true">
+            <div className="orbit-ring orbit-ring-outer"/><div className="orbit-ring orbit-ring-inner"/>
+            <div className="orbit-core"><span>ANROSYS</span><b>Ideas<br/>into impact</b></div>
+            <i className="orbit-dot orbit-dot-one"/><i className="orbit-dot orbit-dot-two"/><i className="orbit-dot orbit-dot-three"/>
           </div>
         </div>
-        <div className="absolute bottom-6 right-7 hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[.16em] text-white/65 md:flex"><span className="h-px w-10 bg-white/40"/>Built for what’s next</div>
+        <div className="absolute bottom-6 right-7 hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[.16em] md:flex"><span className="h-px w-10"/>Built for what’s next</div>
       </section>
 
       <section id="services" className="scroll-mt-16 py-20 md:py-28">
-        <div className="site-shell">
+        <div className="site-shell" data-scroll-reveal>
           <div className="grid gap-8 md:grid-cols-[.8fr_1.2fr] md:items-end">
-            <div><Eyebrow>What we do</Eyebrow><h2 className="display mt-5 max-w-[500px] text-4xl leading-[1.05] text-[#18383d] md:text-[3.6rem]">From a tangled brief to a product that feels clear.</h2></div>
+            <div><Eyebrow>Services</Eyebrow><h2 className="display mt-5 max-w-[500px] text-4xl leading-[1.05] text-[#18383d] md:text-[3.6rem]">From a tangled brief to a product that feels clear.</h2></div>
             <p className="max-w-[480px] pb-1 text-[15px] leading-7 text-[#5b6867] md:ml-auto">No two businesses need the same software. We bring product thinking, design and engineering together around the problem in front of you. Our portfolio includes <a href="https://anrosysedu.in" target="_blank" rel="noreferrer" className="font-semibold text-[#24645e] underline decoration-[#24645e]/40 underline-offset-4 hover:decoration-[#24645e]">EduPortal</a>, our live SaaS product for education institutions.</p>
           </div>
-          <div className="mt-14 grid gap-3 md:grid-cols-3">
+          <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { n: '01', title: 'Find the right problem', text: 'We get close to your workflows, people and constraints before deciding what to build.' },
-              { n: '02', title: 'Shape a useful product', text: 'Clear journeys and considered interfaces make complex work feel natural.' },
-              { n: '03', title: 'Build for real life', text: 'We deliver software with care for performance, security and the team using it every day.' },
-            ].map((item) => <article key={item.n} className="service-card min-h-[260px] px-6 py-7 md:px-7 md:py-8">
-              <span className="font-mono text-[11px] font-semibold text-[#efaa83]">Our approach / {item.n}</span>
-              <h3 className="display mt-7 text-[1.55rem] font-bold tracking-[-.04em] text-[#f7f3e9]">{item.title}</h3>
+              { n: '01', title: 'Full-Stack Development', text: 'End-to-end software, shaped around your workflows and built to grow.' },
+              { n: '02', title: 'AI Development', text: 'Practical AI features that make products and everyday work more useful.' },
+              { n: '03', title: 'Web Applications', text: 'Clear, dependable web experiences for customers and internal teams.' },
+              { n: '04', title: 'Cloud & DevOps', text: 'Reliable infrastructure, thoughtful automation and smoother releases.' },
+              { n: '05', title: 'SaaS Product Engineering', text: 'From first release to scale, we engineer products people return to.' },
+              { n: '06', title: 'Mobile Apps & API Integrations', text: 'Connected mobile experiences that work with the systems you rely on.' },
+            ].map((item) => <article key={item.n} className="service-card min-h-[218px] px-6 py-7 md:px-7 md:py-8">
+              <span className="font-mono text-[11px] font-semibold">Service / {item.n}</span>
+              <h3 className="display mt-7 text-[1.4rem] font-bold tracking-[-.04em] text-[#f7f3e9]">{item.title}</h3>
               <p className="mt-3 max-w-[300px] text-[13px] leading-6 text-[#d5ddd7]">{item.text}</p>
             </article>)}
           </div>
@@ -186,7 +221,7 @@ function Home() {
       </section>
 
       <section id="work" className="scroll-mt-16 py-20 md:py-28">
-        <div className="site-shell">
+        <div className="site-shell" data-scroll-reveal>
           <div className="flex flex-col justify-between gap-7 md:flex-row md:items-end">
             <div><Eyebrow>Clients & projects</Eyebrow><h2 className="display mt-5 max-w-[600px] text-4xl leading-[1.05] text-[#18383d] md:text-[3.7rem]">Different challenges.<br/>One thoughtful way of working.</h2></div>
             <p className="max-w-[360px] text-[14px] leading-6 text-[#5b6867]">Anrosys has worked with 10+ clients across multiple projects. We keep the focus on the work, not the name-dropping.</p>
@@ -195,7 +230,7 @@ function Home() {
             <article className="relative flex min-h-[300px] flex-col justify-between overflow-hidden bg-[#24645e] p-7 text-[#f7f3e9] md:p-10">
               <span className="eyebrow text-[#edaa83]">Selected capability / 01</span>
               <div className="absolute right-[-28px] top-[-65px] h-[245px] w-[245px] rounded-full border border-white/20"/><div className="absolute right-[45px] top-[9px] h-[145px] w-[145px] rounded-full border border-white/20"/>
-              <div className="relative z-10"><p className="display max-w-[500px] text-3xl leading-[1.08] md:text-[2.9rem]">Purpose-built digital platforms for complex day-to-day work.</p><p className="mt-5 max-w-[430px] text-[13px] leading-6 text-white/75">Products that fit the people, processes and decisions behind a business.</p></div>
+              <div className="relative z-10"><p className="display max-w-[500px] text-[1.4rem] leading-[1.12] md:text-[2.25rem]">Purpose-built digital platforms for complex day-to-day work.</p><p className="mt-5 max-w-[430px] text-[13px] leading-6 text-white/75">Products that fit the people, processes and decisions behind a business.</p></div>
             </article>
             <article className="flex min-h-[300px] flex-col justify-between border border-[#18383d]/15 bg-[#efece2] p-7 md:p-9">
               <span className="eyebrow text-[#34756e]">A note on our work</span>
@@ -207,20 +242,20 @@ function Home() {
       </section>
 
       <section id="contact" className="dark-contact scroll-mt-12 py-20 text-[#f7f3e9] md:py-[100px]">
-        <div className="site-shell">
+        <div className="site-shell" data-scroll-reveal>
           <div className="grid gap-10 md:grid-cols-[1fr_.72fr] md:items-end">
             <div><Eyebrow light>Have a project in mind?</Eyebrow><h2 className="display mt-6 max-w-[760px] text-4xl leading-[1.02] md:text-[5rem]">Let’s make the next thing<br className="hidden md:block"/> work better.</h2></div>
             <p className="max-w-[420px] text-[14px] leading-7 text-[#d5ddd7] md:ml-auto">Tell us what’s on your mind. Start with the way that works best for you — we’ll take it from there.</p>
           </div>
           <div className="mt-9 grid gap-3 sm:grid-cols-3">
             <a href={CONTACT.whatsapp} target="_blank" rel="noreferrer" className="contact-card group flex min-h-[158px] flex-col justify-between p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#efaa83] sm:p-6">
-              <span className="eyebrow text-[#efaa83]">Message</span><span className="flex items-end justify-between gap-4"><span><span className="display block text-[1.55rem] font-bold tracking-[-.04em]">WhatsApp</span><span className="mt-1 block text-[11px] text-white/75">Message our team directly</span></span><ArrowUpRight size={19} className="mb-1 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"/></span>
+              <span className="eyebrow text-[#efaa83]">Message</span><span className="flex items-end justify-between gap-4"><span><span className="display flex items-center gap-2.5 text-[1.55rem] font-bold tracking-[-.04em]"><SiWhatsapp aria-hidden="true" className="h-[19px] w-[19px] shrink-0"/>WhatsApp</span><span className="mt-1 block text-[11px] text-white/75">Message our team directly</span></span><ArrowUpRight size={19} className="mb-1 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"/></span>
             </a>
             <a href={CONTACT.email} className="contact-card group flex min-h-[158px] flex-col justify-between p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#efaa83] sm:p-6">
-              <span className="eyebrow text-[#efaa83]">Write</span><span className="flex items-end justify-between gap-4"><span><span className="display block text-[1.55rem] font-bold tracking-[-.04em]">Email</span><span className="mt-1 block break-all text-[11px] text-white/75">anrosysedu@gmail.com</span></span><ArrowUpRight size={19} className="mb-1 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"/></span>
+              <span className="eyebrow text-[#efaa83]">Write</span><span className="flex items-end justify-between gap-4"><span><span className="display flex items-center gap-2.5 text-[1.55rem] font-bold tracking-[-.04em]"><Mail aria-hidden="true" className="h-[19px] w-[19px] shrink-0"/>Email</span><span className="mt-1 block break-all text-[11px] text-white/75">anrosysedu@gmail.com</span></span><ArrowUpRight size={19} className="mb-1 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"/></span>
             </a>
             <a href={CONTACT.calendar} target="_blank" rel="noreferrer" className="contact-card group flex min-h-[158px] flex-col justify-between p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#efaa83] sm:p-6">
-              <span className="eyebrow text-[#efaa83]">Meet</span><span className="flex items-end justify-between gap-4"><span><span className="display block text-[1.55rem] font-bold tracking-[-.04em]">Calendly</span><span className="mt-1 block text-[11px] text-white/75">Book a conversation</span></span><ArrowUpRight size={19} className="mb-1 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"/></span>
+              <span className="eyebrow text-[#efaa83]">Meet</span><span className="flex items-end justify-between gap-4"><span><span className="display flex items-center gap-2.5 text-[1.55rem] font-bold tracking-[-.04em]"><SiCalendly aria-hidden="true" className="h-[19px] w-[19px] shrink-0"/>Calendly</span><span className="mt-1 block text-[11px] text-white/75">Book a conversation</span></span><ArrowUpRight size={19} className="mb-1 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"/></span>
             </a>
           </div>
         </div>
@@ -243,7 +278,7 @@ function About() {
         </div>
       </section>
       <section className="py-20 md:py-28">
-        <div className="site-shell grid gap-14 md:grid-cols-[.7fr_1.3fr]">
+        <div className="site-shell grid gap-14 md:grid-cols-[.7fr_1.3fr]" data-scroll-reveal>
           <div><Eyebrow>How we think</Eyebrow><h2 className="display mt-5 text-4xl leading-[1.04] text-[#18383d] md:text-[3.2rem]">A partner for the whole picture.</h2></div>
           <div className="divide-y divide-[#18383d]/15 border-y border-[#18383d]/15">
             {[
@@ -255,9 +290,34 @@ function About() {
         </div>
       </section>
       <section className="bg-[#18383d] py-16 text-[#f7f3e9] md:py-20">
-        <div className="site-shell grid gap-10 md:grid-cols-[1fr_.72fr] md:items-center">
-          <div><Eyebrow light>In practice</Eyebrow><p className="display mt-6 max-w-[700px] text-3xl leading-[1.15] md:text-[2.8rem]">“We don’t arrive with a pre-made answer. We work alongside you to find the one that fits.”</p></div>
-          <div className="md:justify-self-end"><p className="display text-6xl tracking-[-.06em]">10<span className="text-[#efaa83]">+</span></p><p className="mt-2 text-sm text-[#c4d0ca]">clients across multiple projects</p><a href={CONTACT.calendar} target="_blank" rel="noreferrer" className="mt-7 inline-flex items-center gap-2 border-b border-[#efaa83] pb-1.5 text-[12px] font-bold text-[#efaa83]">Start a conversation <ArrowUpRight size={15}/></a></div>
+        <div className="site-shell grid gap-10 md:grid-cols-[1fr_.72fr] md:items-center" data-scroll-reveal>
+          <div><Eyebrow light>In practice</Eyebrow><p className="display mt-6 max-w-[700px] text-[1.4rem] leading-[1.18] md:text-[2.2rem]">“We don’t arrive with a pre-made answer. We work alongside you to find the one that fits.”</p></div>
+          <div className="md:justify-self-end"><p className="display text-5xl tracking-[-.06em]">10<span className="text-[#efaa83]">+</span></p><p className="mt-2 text-sm text-[#c4d0ca]">clients across multiple projects</p><a href={CONTACT.calendar} target="_blank" rel="noreferrer" className="mt-7 inline-flex items-center gap-2 border-b border-[#efaa83] pb-1.5 text-[12px] font-bold text-[#efaa83]">Start a conversation <ArrowUpRight size={15}/></a></div>
+        </div>
+      </section>
+      <section className="founder-message py-20 md:py-28">
+        <div className="site-shell" data-scroll-reveal>
+          <div className="founder-message-panel relative overflow-hidden border border-[#cbdfe4] bg-[#edf5f7] px-6 py-9 md:px-12 md:py-14">
+            <div aria-hidden="true" className="absolute right-[-3rem] top-[-4rem] h-52 w-52 rounded-full border border-[#1a9aa7]/15 md:right-[-1rem] md:top-[-5rem] md:h-72 md:w-72" />
+            <div className="relative grid gap-8 md:grid-cols-[.58fr_1.42fr] md:gap-12">
+              <div>
+                <Eyebrow>Founder's message</Eyebrow>
+                <p className="mt-5 max-w-[220px] text-[12px] font-semibold leading-6 text-[#607789]">A note on how we listen, think and build together.</p>
+              </div>
+              <div>
+                <p className="display max-w-[820px] text-[1.45rem] leading-[1.45] text-[#172b49] md:text-[2rem]">
+                  We at Anrosys believe great software starts with listening. We learn how your business works, understand the needs of your people, and bring product thinking, design, and engineering together to build digital products they can rely on. Our aim is to make complex work clearer and help good ideas move forward.
+                </p>
+                <div className="mt-8 flex items-center gap-4 border-t border-[#cbdfe4] pt-5">
+                  <span aria-hidden="true" className="grid h-11 w-11 place-items-center rounded-full bg-[#d9eef1] font-mono text-[12px] font-semibold text-[#168b92]">IP</span>
+                  <div>
+                    <p className="text-[14px] font-bold text-[#172b49]">Ishan Pandita</p>
+                    <p className="mt-1 text-[11px] font-medium tracking-[.08em] text-[#607789]">Founder, Anrosys</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <ContactBand />
@@ -266,7 +326,7 @@ function About() {
 }
 
 function ContactBand() {
-  return <section className="dark-contact py-16 text-[#f7f3e9] md:py-20"><div className="site-shell flex flex-col justify-between gap-7 md:flex-row md:items-center"><div><Eyebrow light>Ready when you are</Eyebrow><h2 className="display mt-4 text-4xl md:text-[3.5rem]">Tell us what needs to work better.</h2></div><a href={CONTACT.calendar} target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-3 rounded-full bg-[#f0a47a] px-6 py-4 text-[13px] font-bold text-[#18383d]">Book a conversation <ArrowUpRight size={16}/></a></div></section>;
+  return <section className="dark-contact py-16 text-[#f7f3e9] md:py-20"><div className="site-shell flex flex-col justify-between gap-7 md:flex-row md:items-center" data-scroll-reveal><div><Eyebrow light>Ready when you are</Eyebrow><h2 className="display mt-4 text-4xl md:text-[3.5rem]">Tell us what needs to work better.</h2></div><a href={CONTACT.calendar} target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-3 rounded-full bg-[#f0a47a] px-6 py-4 text-[13px] font-bold text-[#18383d]">Book a conversation <ArrowUpRight size={16}/></a></div></section>;
 }
 
 function Careers() {
@@ -279,7 +339,7 @@ function Careers() {
         </div>
       </section>
       <section className="py-20 md:py-28">
-        <div className="site-shell grid gap-12 md:grid-cols-[.68fr_1.32fr]">
+        <div className="site-shell grid gap-12 md:grid-cols-[.68fr_1.32fr]" data-scroll-reveal>
           <div><Eyebrow>Work with us</Eyebrow><h2 className="display mt-5 text-4xl leading-tight text-[#18383d]">Bring your way of thinking.</h2></div>
           <div>
             <p className="max-w-[600px] text-[16px] leading-8 text-[#536360]">Anrosys works across product, design and software — helping businesses turn specific needs into dependable digital products. We value curiosity, clear communication and care for the details that make work better.</p>
@@ -290,15 +350,18 @@ function Careers() {
         </div>
       </section>
       <section className="dark-contact py-16 text-[#f7f3e9] md:py-24">
-        <div className="site-shell grid gap-10 md:grid-cols-[1fr_.7fr] md:items-center">
+        <div className="site-shell grid gap-10 md:grid-cols-[1fr_.7fr] md:items-center" data-scroll-reveal>
           <div><Eyebrow light>Your next step</Eyebrow><h2 className="display mt-6 max-w-[700px] text-4xl leading-[1.04] md:text-[4.4rem]">Send us a note.<br/>Let’s see if it fits.</h2><p className="mt-5 max-w-[470px] text-[14px] leading-7 text-[#d5ddd7]">Share a little about yourself, the work you enjoy, and what you’d like to explore next. Attach your resume when you email us.</p></div>
           <div className="md:justify-self-end">
             <a href={CONTACT.careers} className="inline-flex items-center gap-3 rounded-full bg-[#f0a47a] px-6 py-4 text-[13px] font-bold text-[#18383d] transition-transform hover:-translate-y-1">Apply / send your resume <ArrowUpRight size={16}/></a>
-            <p className="mt-4 text-[12px] text-white/70">Email your application to <a href={CONTACT.careers} className="font-semibold text-white underline underline-offset-4">xyz@mail</a></p>
+            <p className="mt-4 text-[12px] text-white/70">Email your application to <a href={CONTACT.careers} className="font-semibold text-white underline underline-offset-4">anrosysedu@gmail.com</a></p>
           </div>
         </div>
+        <div className="site-shell mt-12 flex flex-col gap-3 border-t border-[#18383d]/15 pt-6 text-[13px] text-[#63716e] sm:flex-row sm:items-center sm:justify-between">
+          <p>No specific role in mind? That’s okay. A good conversation can start anywhere.</p>
+          <a href={CONTACT.careers} className="inline-flex w-fit items-center gap-2 font-bold text-[#24645e]">Write to the team <ArrowRight size={14}/></a>
+        </div>
       </section>
-      <section className="py-14"><div className="site-shell flex flex-col gap-3 text-[13px] text-[#63716e] sm:flex-row sm:items-center sm:justify-between"><p>No specific role in mind? That’s okay. A good conversation can start anywhere.</p><a href={CONTACT.careers} className="inline-flex w-fit items-center gap-2 font-bold text-[#24645e]">Write to the team <ArrowRight size={14}/></a></div></section>
     </main>
   );
 }
@@ -308,6 +371,42 @@ function NotFound() {
 }
 
 function App() {
+  const [location] = useLocation();
+  useEffect(() => {
+    const root = document.documentElement;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      root.classList.remove('motion-ready');
+      return;
+    }
+
+    const timers = new Set<number>();
+    root.classList.add('motion-ready');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const element = entry.target as HTMLElement;
+        observer.unobserve(element);
+        const timer = window.setTimeout(() => {
+          element.classList.add('is-revealed');
+          timers.delete(timer);
+        }, 1000);
+        timers.add(timer);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+
+    document.querySelectorAll<HTMLElement>('[data-scroll-reveal]').forEach((element) => {
+      observer.observe(element);
+    });
+
+    return () => {
+      observer.disconnect();
+      timers.forEach(window.clearTimeout);
+      timers.clear();
+      root.classList.remove('motion-ready');
+    };
+  }, [location]);
+
   return <>
     <Metadata />
     <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2">Skip to content</a>
